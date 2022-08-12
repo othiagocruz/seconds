@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	h1 {
+		@apply relative text-white mix-blend-difference;
+	}
+	input[type='text'] {
+		@apply border-none outline-hidden focus:border-none select-none focus:ring-0 focus:outline-hidden   mix-blend-difference
+					 p-0 absolute top-0 left-0 caret-transparent text-transparent bg-white z-10 leading-none w-screen h-screen text-center;
+	}
+	html {
+		@apply font-kepler text-9xl md:text-[24rem] leading-3 text-center m-0 p-0 w-screen h-screen;
+	}
+	body {
+		@apply w-screen h-screen flex items-center justify-center m-0 p-0 transition-colors;
+	}
+}
