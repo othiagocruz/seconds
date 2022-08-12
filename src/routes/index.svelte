@@ -1,17 +1,31 @@
 <script lang="ts">
+	import { browser } from '$app/env';
 	import { decreaser } from '$lib/transitions';
 	import { onMount } from 'svelte';
-	let counter = 175;
+	$: counter = 175;
+	let counterRef = 175;
 	let unique = {};
+	let intervalId: ReturnType<typeof setInterval>;
 	onMount(() => {
 		unique = {};
 		document.getElementById('seconds')?.focus();
+		intervalId = setInterval(() => {
+			if (counter > 0) {
+				counter--;
+			}
+		}, 1000);
 	});
+	$: if (browser) {
+		let element = document.getElementById('curtain');
+		if (element)
+			element.style.transform = `translateY(-${((counter * 100) / counterRef).toFixed(2)}%)`;
+	}
 </script>
 
 {#key unique}
 	<h1 in:decreaser>{counter}</h1>
 {/key}
+<div id="curtain" class="" />
 <input
 	type="text"
 	id="seconds"
@@ -20,6 +34,14 @@
 		if (isNaN(parseInt(e.key)) && e.key !== 'Backspace') e.preventDefault();
 	}}
 	on:keyup={() => {
+		clearInterval(intervalId);
+		if (counter.toString().trim() === '') return false;
+		intervalId = setInterval(() => {
+			if (counter > 0) {
+				counter--;
+			}
+		}, 1000);
+		counterRef = counter;
 		unique = {};
 	}}
 />
