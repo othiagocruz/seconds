@@ -1,7 +1,7 @@
 @font-face {
   font-family: "kepler-std-semicondensed-dis";
-  src: url("/kepler.woff2") format("woff2"), url("/keppler.woff") format("woff"),
-    url("/keppler.otf") format("opentype");
+  src: url("$lib/fonts/kepler.woff2") format("woff2"), url("$lib/fonts/keppler.woff") format("woff"),
+    url("$lib/fonts/keppler.otf") format("opentype");
   font-display: auto;
   font-style: normal;
   font-weight: 700;
