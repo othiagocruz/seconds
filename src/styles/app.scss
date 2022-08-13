@@ -11,9 +11,9 @@
   h1 {
     @apply relative z-10 text-white mix-blend-difference;
   }
-  input[type="text"] {
+  input[type="number"] {
     @apply border-none outline-hidden focus:border-none select-none focus:ring-0 focus:outline-hidden 
-					 mix-blend-difference p-0 absolute top-0 left-0 caret-transparent text-transparent duration-1000
+					 mix-blend-overlay p-0 absolute top-0 left-0 caret-transparent text-transparent duration-1000
 					 z-20 leading-none w-screen h-screen text-center bg-transparent;
   }
   html {

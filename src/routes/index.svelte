@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { browser } from "$app/env";
   import { decreaser } from "$lib/transitions";
   import { onMount } from "svelte";
   $: counter = 175;
@@ -16,7 +15,7 @@
       }
     }, 1000);
   });
-  $: if (browser) {
+  $: if (typeof document !== "undefined") {
     let element = document.getElementById("curtain");
     if (element)
       element.style.transform = `translateY(-${((counter * 100) / counterRef).toFixed(2)}%)`;
@@ -28,15 +27,10 @@
 {/key}
 <div id="curtain" class:retract style:transition={retract ? "none" : null} />
 <input
-  type="text"
+  type="number"
   id="seconds"
   bind:value={counter}
-  on:keypress={(e) => {
-    if (isNaN(parseInt(e.key)) && e.key !== "Backspace") e.preventDefault();
-  }}
-  on:keyup={(e) => {
-    if (counter.toString().trim() === "" || (isNaN(parseInt(e.key)) && e.key !== "Backspace"))
-      return false;
+  on:input={() => {
     retract = true;
     clearInterval(intervalId);
     counterRef = counter;
