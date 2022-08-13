@@ -1,5 +1,5 @@
 <script>
-  import "$styles/fonts.css";
+  import "$styles/fonts.scss";
   import "$styles/app.scss";
 </script>
 

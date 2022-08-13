@@ -17,7 +17,6 @@
     }, 1000);
   });
   $: if (browser) {
-    console.log(counter, counterRef);
     let element = document.getElementById("curtain");
     if (element)
       element.style.transform = `translateY(-${((counter * 100) / counterRef).toFixed(2)}%)`;
