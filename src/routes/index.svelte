@@ -29,6 +29,8 @@
 <input
   type="number"
   id="seconds"
+  min={1}
+  inputmode="numeric"
   bind:value={counter}
   on:input={() => {
     retract = true;
