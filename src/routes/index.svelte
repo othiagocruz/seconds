@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { browser } from "$app/env";
   import { decreaser } from "$lib/transitions";
+  import { removeDigits } from "$lib/utils";
   import { onMount } from "svelte";
   $: counter = 175;
   $: counterRef = 175;
@@ -15,7 +17,7 @@
       }
     }, 1000);
   });
-  $: if (typeof document !== "undefined") {
+  $: if (browser) {
     let element = document.getElementById("curtain");
     if (element)
       element.style.transform = `translateY(-${((counter * 100) / counterRef).toFixed(2)}%)`;
@@ -32,6 +34,24 @@
   min={1}
   inputmode="numeric"
   bind:value={counter}
+  on:keydown={(e) => {
+    if (e.key === "Backspace") e.preventDefault();
+  }}
+  on:keyup={(e) => {
+    if (e.key === "Backspace") {
+      clearInterval(intervalId);
+      counter = removeDigits(counter, 1);
+      retract = true;
+      counterRef = counter;
+      intervalId = setInterval(() => {
+        if (counter > 0) {
+          counter--;
+        }
+        retract = false;
+      }, 1000);
+      unique = {};
+    }
+  }}
   on:input={() => {
     retract = true;
     clearInterval(intervalId);
